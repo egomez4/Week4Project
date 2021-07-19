@@ -2,5 +2,45 @@
 {% block content %}
     <h2>{{ subtitle }}</h2>
     <p>{{ text }}</p>
+<div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class='form-group'>
+            <div class="form-group">
+                {{ form.state.label(class="form-control-label") }}
+                {% if form.state.errors %}
+                {{ form.state(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.state.errors%}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.state(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class='form-group'>
+                {{ form.zip_code.label(class="form-control-label") }}
+                {% if form.zip_code.errors %}
+                {{ form.zip_code(class="form-control form-control-lg is-invalid") }}
+                <div class='invalid-feedback'>
+                    {% for error in form.zip_code.errors%}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.zip_code(class='form-control form-control-lg') }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
 {% endblock content %}
 
