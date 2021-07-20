@@ -1,4 +1,4 @@
-#sudo pip3 install petpy
+# sudo pip3 install petpy
 import petpy
 from flask import Flask, render_template, url_for, flash, redirect
 from forms import AnimalsForm, OrganizationForm
@@ -14,9 +14,11 @@ api_secret = 'IijpJC2ivqOzvZrJItbXxBNp7KUHZefKsP5YlNtY'
 
 pf = petpy.Petfinder(api_key, secret=api_secret)
 
+
 @app.route('/')
 def home():
-    return render_template('home.html', subtitle = 'Home')
+    return render_template('home.html', subtitle='Home')
+
 
 @app.route('/animals', methods=['GET', 'POST'])
 def animals():
@@ -30,12 +32,17 @@ def animals():
         return redirect(url_for('home'))
     return render_template('animals.html', subtitle='Animals', form=form)
 
+
 @app.route('/organizations', methods=['GET', 'POST'])
 def organizations():
     form = OrganizationForm()
     zip_code = form.zip_code.data
     print(zip_code)
-    return render_template('organizations.html', subtitle='Organizations', form=form)
+    return render_template(
+        'organizations.html',
+        subtitle='Organizations',
+        form=form)
+
 
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")

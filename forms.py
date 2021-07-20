@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
-states = [ ("AL", "Alabama"),
+states = [("AL", "Alabama"),
           ("AK", "Alaska"),
           ("AZ", "Arizona"),
           ("AR", "Arkansas"),
@@ -52,8 +52,8 @@ states = [ ("AL", "Alabama"),
           ("WA", "Washington"),
           ("WV", "West Virginia"),
           ("WI", "Wisconsin"),
-          ("WY", "Wyoming")   
-]
+          ("WY", "Wyoming")
+          ]
 
 animalType = [("dog", "Dog"),
               ("cat", "Cat"),
@@ -62,19 +62,21 @@ animalType = [("dog", "Dog"),
               ("smallfurry", "Small Furry"),
               ("horse", "Horse"),
               ("barnyard", "Barnyard")
-]
+              ]
+
 
 class AnimalsForm(FlaskForm):
-    animalType = SelectField('Animal Type', choices = animalType, 
-                           validators=[DataRequired()])
-    #breed = StringField('Email',
+    animalType = SelectField('Animal Type', choices=animalType,
+                             validators=[DataRequired()])
+    # breed = StringField('Email',
     #                    validators=[DataRequired(), Email()])
-    state = SelectField('State', choices = states, validators=[DataRequired()])
+    state = SelectField('State', choices=states, validators=[DataRequired()])
     kids = BooleanField('Good with Kids', default=False)
     dogs = BooleanField('Good with Dogs', default=False)
     cats = BooleanField('Good with Cats', default=False)
     submit = SubmitField('Search')
-    
+
+
 class OrganizationForm(FlaskForm):
     zip_code = StringField('Zip Code')
     state = SelectField('State', choices=states, validators=[DataRequired()])
