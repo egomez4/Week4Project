@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>{{ subtitle }}</h2>
+    <p>{{ text }}</p>
+    <div class='content-section'>
+        <p>This is a paragraph</p>
+        {{ data.to_html(classes="table table-striped") | safe}}
+    </div>
+{% endblock content %}

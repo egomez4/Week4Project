@@ -29,7 +29,8 @@ def animals():
         kids = form.kids.data
         dogs = form.dogs.data
         cats = form.cats.data
-        return redirect(url_for('home'))
+        data = findAnimal(animalType, state, kids, dogs, cats)
+        return render_template('animalsResults.html', subtitle='results', data=data)
     return render_template('animals.html', subtitle='Animals', form=form)
 
 
@@ -42,6 +43,15 @@ def organizations():
         'organizations.html',
         subtitle='Organizations',
         form=form)
+    
+
+def findAnimal(animalType, state, kids, dogs, cats):
+    return pf.animals(animal_type = animalType, location = state, 
+                      good_with_children = kids, 
+                      good_with_dogs = dogs,
+                      good_with_cats = cats, return_df = True)
+
+
 
 
 if __name__ == '__main__':               # this should always be at the end
