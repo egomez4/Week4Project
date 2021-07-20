@@ -55,9 +55,18 @@ states = [ ("AL", "Alabama"),
           ("WY", "Wyoming")   
 ]
 
+animalType = [("dog", "Dog"),
+              ("cat", "Cat"),
+              ("bird", "Bird"),
+              ("reptile", "Reptile"),
+              ("smallfurry", "Small Furry"),
+              ("horse", "Horse"),
+              ("barnyard", "Barnyard")
+]
+
 class AnimalsForm(FlaskForm):
-    #animalType = SelectField(
-    #                       validators=[DataRequired(), Length(min=2, max=20)])
+    animalType = SelectField('Animal Type', choices = animalType, 
+                           validators=[DataRequired()])
     #breed = StringField('Email',
     #                    validators=[DataRequired(), Email()])
     state = SelectField('State', choices = states, validators=[DataRequired()])

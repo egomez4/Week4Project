@@ -14,8 +14,6 @@ api_secret = 'IijpJC2ivqOzvZrJItbXxBNp7KUHZefKsP5YlNtY'
 
 pf = petpy.Petfinder(api_key, secret=api_secret)
 
-#print(pf.animal_types())
-
 @app.route('/')
 def home():
     return render_template('home.html', subtitle = 'Home')
@@ -24,6 +22,11 @@ def home():
 def animals():
     form = AnimalsForm()
     if form.validate_on_submit():
+        animalType = form.animalType.data
+        state = form.state.data
+        kids = form.kids.data
+        dogs = form.dogs.data
+        cats = form.cats.data
         return redirect(url_for('home'))
     return render_template('animals.html', subtitle='Animals', form=form)
 
