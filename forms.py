@@ -65,7 +65,6 @@ animalType = [("dog", "Dog"),
               ]
 
 
-
 class AnimalsForm(FlaskForm):
     animalType = SelectField('Animal Type', choices=animalType,
                              validators=[DataRequired()])
