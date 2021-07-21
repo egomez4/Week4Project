@@ -18,7 +18,9 @@ jobs:
           pip3 install flask
           pip3 install flask-wtf
           pip3 install turbo-flask
+          pip3 install petpy
           pip3 install coverage
+          
       - name: Test webpages
         run: python3 tests/testPages.py
         
