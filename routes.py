@@ -36,8 +36,8 @@ def animals():
         return render_template(
             'animalsResults.html',
             subtitle='results',
-            data = df
-            )
+            data=df
+        )
     return render_template('animals.html', subtitle='Animals', form=form)
 
 
@@ -58,8 +58,10 @@ def organizations():
             'organizationResults.html',
             subtitle='Organizations',
             data=data, img_url=img_url)
-    return render_template('organizations.html', subtitle='Organizations', form=form)
-
+    return render_template(
+        'organizations.html',
+        subtitle='Organizations',
+        form=form)
 
 
 def findAnimal(animalType, state, kids, dogs, cats):
@@ -68,21 +70,25 @@ def findAnimal(animalType, state, kids, dogs, cats):
                       good_with_dogs=dogs,
                       good_with_cats=cats)
 
+
 def find_organization(state, zip_code):
     return pf.organizations(state=state, location=zip_code)
+
 
 def createDictionary(data):
     animalsDict = {}
     for animals in data['animals']:
-        animalsDict[animals['id']] = [animals['name'], animals['age'], animals['size'], animals['url']]
-    
+        animalsDict[animals['id']] = [animals['name'],
+                                      animals['age'], animals['size'], animals['url']]
+
     return animalsDict
 
-def dict_to_dataframes(animalsDict):
-    df = pd.DataFrame.from_dict(animalsDict,
-                                  orient='index', columns=['Name','Age','Size', 'Link'])
-    return df
 
+def dict_to_dataframes(animalsDict):
+    df = pd.DataFrame.from_dict(
+        animalsDict, orient='index', columns=[
+            'Name', 'Age', 'Size', 'Link'])
+    return df
 
 
 if __name__ == '__main__':               # this should always be at the end
