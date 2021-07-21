@@ -1,6 +1,5 @@
 # sudo pip3 install petpy
 import petpy
-import pandas as pd
 from flask import Flask, render_template, url_for, flash, redirect
 from forms import AnimalsForm, OrganizationForm
 from flask_behind_proxy import FlaskBehindProxy
@@ -32,11 +31,10 @@ def animals():
         cats = form.cats.data
         data = findAnimal(animalType, state, kids, dogs, cats)
         dictionary = createDictionary(data)
-        df = dict_to_dataframes(dictionary)
         return render_template(
             'animalsResults.html',
             subtitle='results',
-            data=df
+            data=dictionary
         )
     return render_template('animals.html', subtitle='Animals', form=form)
 
@@ -83,7 +81,8 @@ def findAnimal(animalType, state, kids, dogs, cats):
     return pf.animals(animal_type=animalType, location=state,
                       good_with_children=kids,
                       good_with_dogs=dogs,
-                      good_with_cats=cats)
+                      good_with_cats=cats,
+                      return_df = True)
 
 
 def find_organization(state, zip_code):
@@ -92,21 +91,14 @@ def find_organization(state, zip_code):
 
 def createDictionary(data):
     animalsDict = {}
-    for animals in data['animals']:
-        animalsDict[animals['id']] = [animals['name'],
-                                      animals['age'], 
-                                      animals['size'],
-                                      animals['url']
-                                     ]
-
+    for ind in data.index:
+        animalsDict[data['id'][ind]] = {'Name': data['name'][ind],
+                                        'Age': data['age'][ind], 
+                                        'Size': data['size'][ind], 
+                                        'Link': data['url'][ind],
+                                        'Photo': data['primary_photo_cropped.small'][ind],
+                                       }
     return animalsDict
-
-
-def dict_to_dataframes(animalsDict):
-    df = pd.DataFrame.from_dict(
-        animalsDict, orient='index', columns=[
-            'Name', 'Age', 'Size', 'Link'])
-    return df
 
 
 if __name__ == '__main__':               # this should always be at the end

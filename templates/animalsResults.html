@@ -4,12 +4,14 @@
     <p>{{ text }}</p>
 
     <div class='content-section'>
-         {%for ind in data.index%}
+         {%for key in data%}
             <li>
-                <h5>{{data['Name'][ind]}}</h5>
-                 <p>Age: {{data['Age'][ind]}} </p>
-                 <p>Size: {{data['Size'][ind]}}</p>
-                 <a href= "{{data['Link'][ind]}}" >Click Here for more Info</a>
+                <h3>{{data[key]['Name']}}</h3>
+                    <p>Age: {{data[key]['Age']}}
+                       Size: {{data[key]['Size']}} 
+                    </p>
+                <a href= {{data[key]['Link']}} >Click Here for more Info</a>
+                 <img src={{data[key]['Photo']}} alt='Animal Profile'>
             </li>
         {%endfor%}
     </div>

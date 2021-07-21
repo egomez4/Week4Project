@@ -13,11 +13,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #fff;
+  color: #cbd5db;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #333333;
+  color: #fff;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -92,7 +92,7 @@ a.article-title:hover {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     display: block;
-    background: #a8c5e2;
+    background: #fff;
 }
 
 .organization-card:hover {
