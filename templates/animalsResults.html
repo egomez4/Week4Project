@@ -6,12 +6,11 @@
     <div class='content-section'>
          {%for ind in data.index%}
             <li>
-                <h3>{{data['Name'][ind]}}</h3>
-                    <p>Age: {{data['Age'][ind]}}
-                       Size: {{data['Size'][ind]}} 
-                    </p>
+                <h5>{{data['Name'][ind]}}</h5>
+                 <p>Age: {{data['Age'][ind]}} </p>
+                 <p>Size: {{data['Size'][ind]}}</p>
+                 <a href= "{{data['Link'][ind]}}" >Click Here for more Info</a>
             </li>
         {%endfor%}
-        {{ data.to_html(classes="table table-striped", render_links = true) | safe}}
     </div>
 {% endblock content %}

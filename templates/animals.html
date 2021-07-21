@@ -7,7 +7,7 @@
  <div class="form-group">
     {{ form.animalType.label(class="form-select-label") }}
      {% if form.animalType.errors %}
-       {{ form.state(class="form-select form-select-lg is-invalid") }}
+       {{ form.animalType(class="form-select form-select-lg is-invalid") }}
        <div class="invalid-feedback">
          {% for error in form.animalType.errors%}
              <span>{{error}}</span>
@@ -75,5 +75,13 @@
   </div>
          </form>
      </div>
-
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+       <div class="alert alert-{{ category }}">
+         {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 {% endblock content %}
