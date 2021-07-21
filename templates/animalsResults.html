@@ -2,8 +2,16 @@
 {% block content %}
     <h2>{{ subtitle }}</h2>
     <p>{{ text }}</p>
+
     <div class='content-section'>
-        <p>This is a paragraph</p>
-        {{ data.to_html(classes="table table-striped") | safe}}
+         {%for ind in data.index%}
+            <li>
+                <h3>{{data['Name'][ind]}}</h3>
+                    <p>Age: {{data['Age'][ind]}}
+                       Size: {{data['Size'][ind]}} 
+                    </p>
+            </li>
+        {%endfor%}
+        {{ data.to_html(classes="table table-striped", render_links = true) | safe}}
     </div>
 {% endblock content %}
