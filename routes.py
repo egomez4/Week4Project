@@ -79,7 +79,9 @@ def createDictionary(data):
     animalsDict = {}
     for animals in data['animals']:
         animalsDict[animals['id']] = [animals['name'],
-                                      animals['age'], animals['size'], animals['url']]
+                                      animals['age'], 
+                                      animals['size'], 
+                                      animals['url']]
 
     return animalsDict
 
