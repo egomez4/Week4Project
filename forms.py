@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, SelectField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms.validators import DataRequired, Length, EqualTo
 
 states = [("AL", "Alabama"),
           ("AK", "Alaska"),
@@ -58,8 +58,8 @@ states = [("AL", "Alabama"),
 animalType = [("dog", "Dog"),
               ("cat", "Cat"),
               ("bird", "Bird"),
-              ("reptile", "Reptile"),
-              ("smallfurry", "Small Furry"),
+              ("scales-fins-other", "Fish or Reptile"),
+              ("small-furry", "Small Furry"),
               ("horse", "Horse"),
               ("barnyard", "Barnyard")
               ]
@@ -68,8 +68,6 @@ animalType = [("dog", "Dog"),
 class AnimalsForm(FlaskForm):
     animalType = SelectField('Animal Type', choices=animalType,
                              validators=[DataRequired()])
-    # breed = StringField('Email',
-    #                    validators=[DataRequired(), Email()])
     state = SelectField('State', choices=states, validators=[DataRequired()])
     kids = BooleanField('Good with Kids', default=False)
     dogs = BooleanField('Good with Dogs', default=False)
@@ -78,6 +76,6 @@ class AnimalsForm(FlaskForm):
 
 
 class OrganizationForm(FlaskForm):
-    zip_code = StringField('Zip Code')
+    zip_code = StringField('Zip Code', validators=[DataRequired(), Length(min=5, max=5)])
     state = SelectField('State', choices=states, validators=[DataRequired()])
     submit = SubmitField('Search')

@@ -2,17 +2,15 @@
 {% block content %}
     <h2>{{ subtitle }}</h2>
     <p>{{ text }}</p>
-
-    <div class='content-section'>
-         {%for key in data%}
-            <li>
-                <h3>{{data[key]['Name']}}</h3>
-                    <p>Age: {{data[key]['Age']}}
-                       Size: {{data[key]['Size']}} 
-                    </p>
-                <a href= {{data[key]['Link']}} >Click Here for more Info</a>
-                 <img src={{data[key]['Photo']}} alt='Animal Profile'>
-            </li>
-        {%endfor%}
-    </div>
+    {%for key in data%}
+        <div class="organization-card">
+            <h3>{{data[key]['Name']}}</h3>
+            <img src={{data[key]['Photo']}} alt='Animal Profile'>
+            <p>Species: {{data[key]['Species']}} </p>
+            <p>Age: {{data[key]['Age']}} </p>
+            <p>Size: {{data[key]['Size']}} </p>
+            <a href= {{data[key]['Link']}} >Click Here for more Info</a>
+          </div>
+    {%endfor%}
+  
 {% endblock content %}

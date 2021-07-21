@@ -25,17 +25,20 @@ def animals():
     form = AnimalsForm()
     if form.validate_on_submit():
         animalType = form.animalType.data
+        print(animalType)
         state = form.state.data
         kids = form.kids.data
         dogs = form.dogs.data
         cats = form.cats.data
-        data = findAnimal(animalType, state, kids, dogs, cats)
+        try:
+            data = findAnimal(animalType, state, kids, dogs, cats)
+        except KeyError:
+            return redirect(url_for('animals'))
         dictionary = createDictionary(data)
-        return render_template(
-            'animalsResults.html',
-            subtitle='results',
-            data=dictionary
-        )
+        return render_template('animalsResults.html',
+                                subtitle='Results',
+                                data=dictionary
+                               )
     return render_template('animals.html', subtitle='Animals', form=form)
 
 
@@ -82,7 +85,8 @@ def findAnimal(animalType, state, kids, dogs, cats):
                       good_with_children=kids,
                       good_with_dogs=dogs,
                       good_with_cats=cats,
-                      return_df = True)
+                      return_df = True
+                    )
 
 
 def find_organization(state, zip_code):
@@ -93,6 +97,7 @@ def createDictionary(data):
     animalsDict = {}
     for ind in data.index:
         animalsDict[data['id'][ind]] = {'Name': data['name'][ind],
+                                        'Species': data['species'][ind],
                                         'Age': data['age'][ind], 
                                         'Size': data['size'][ind], 
                                         'Link': data['url'][ind],
