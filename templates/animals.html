@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
+<div>
+    <h1>Find Animals Available for Adoption</h1>
+</div>
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -31,7 +34,7 @@
    {% endif %}
  </div>
  <div class="form-group">
-     {{ form.kids.label(class="form-check-label-inline") }}
+     {{ form.kids.label(class="form-check-label") }}
      {% if form.kids.errors %}
        {{ form.kids(class="form-check form-check-lg is-invalid") }}
        <div class="invalid-feedback">

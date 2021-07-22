@@ -33,7 +33,7 @@ def animals():
         try:
             data = findAnimal(animalType, state, kids, dogs, cats)
         except KeyError:
-            return redirect(url_for('animals'))
+            return render_template('animalsError.html')
         dictionary = createDictionary(data)
         return render_template('animalsResults.html',
                                 subtitle='Results',
@@ -50,32 +50,38 @@ def organizations():
         # zip_code = form.zip_code.data
         state = form.state.data
         zip_code = form.zip_code.data
-        data = find_organization(state=state, zip_code=zip_code)
+        try:
+            data = find_organization(state=state, zip_code=zip_code)
+        except Exception:
+            return redirect(url_for('organizations'))
+            
+        if data['organizations']:
+            # get all organizations
+            orgs_list = []
 
-        # get all organizations
-        orgs_list = []
+            for org in data['organizations']:
+                # dictionary for organization
+                orgs = {}
 
-        for org in data['organizations']:
-            # dictionary for organization
-            orgs = {}
+                # fill in organization information
+                orgs.update({'id': org['id']})
+                orgs.update({'name': org['name']})
+                orgs.update({'email': org['email']})
+                orgs.update({'phone': org['phone']})
+                orgs.update({'address': org['address']})
+                orgs.update({'website': org['website']})
+                # some orgs may not have an image
+                if org['photos']:
+                    orgs.update({'photo': org['photos'][0]['medium']})
 
-            # fill in organization information
-            orgs.update({'id': org['id']})
-            orgs.update({'name': org['name']})
-            orgs.update({'email': org['email']})
-            orgs.update({'phone': org['phone']})
-            orgs.update({'address': org['address']})
-            orgs.update({'website': org['website']})
-            # some orgs may not have an image
-            if org['photos']:
-                orgs.update({'photo': org['photos'][0]['medium']})
+                orgs.update({'social_media': org['social_media']})
 
-            orgs.update({'social_media': org['social_media']})
+                # add this organization to the list of all organizations
+                orgs_list.append(orgs)
 
-            # add this organization to the list of all organizations
-            orgs_list.append(orgs)
-
-        return render_template('organizationResults.html', subtitle='Organizations', data=data, orgs=orgs_list)
+            return render_template('organizationResults.html', subtitle='Organizations', data=data, orgs=orgs_list)
+        else:
+            return render_template('error.html')
     
     return render_template('organizations.html', subtitle='Organizations', form=form)
 

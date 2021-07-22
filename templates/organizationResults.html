@@ -4,10 +4,17 @@
         {% for o in orgs %}
         <div class="organization-card">
             <h3>{{o['name']}}</h3>
-            <img src={{o['photo']}}>
+            {% if o['photo'] %}
+            <img src={{o['photo']}} class='card-image'>
+            {% endif %}
             <p>Email: {{o['email']}}</p>
             <p>Phone: {{o['phone']}}</p>
-            <p>Website: <a href={{o['website']}}>{{o['website']}}</a></p>
+            {% if o['website'] == None %}
+                <p>Website: None</p>
+            {% else %}
+                <p>Website: <a href={{o['website']}} target='_blank'>{{o['website']}}</a></p>
+            {% endif %}
+
         </div>
         {% endfor %}
 {% endblock content %}
