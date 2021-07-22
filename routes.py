@@ -114,7 +114,7 @@ def createDictionary(data):
                                         'Age': data['age'][ind],
                                         'Size': data['size'][ind],
                                         'Link': data['url'][ind],
-                                        'Photo': data['primary_photo_cropped.small'][ind],
+                            'Photo': data['primary_photo_cropped.small'][ind],
                                         }
     return animalsDict
 
