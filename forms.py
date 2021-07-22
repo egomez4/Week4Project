@@ -76,6 +76,9 @@ class AnimalsForm(FlaskForm):
 
 
 class OrganizationForm(FlaskForm):
-    zip_code = StringField('Zip Code', validators=[DataRequired(), Length(min=5, max=5)])
+    zip_code = StringField(
+        'Zip Code', validators=[
+            DataRequired(), Length(
+                min=5, max=5)])
     state = SelectField('State', choices=states, validators=[DataRequired()])
     submit = SubmitField('Search')

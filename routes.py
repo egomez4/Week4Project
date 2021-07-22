@@ -36,8 +36,8 @@ def animals():
             return render_template('animalsError.html')
         dictionary = createDictionary(data)
         return render_template('animalsResults.html',
-                                subtitle='Results',
-                                data=dictionary
+                               subtitle='Results',
+                               data=dictionary
                                )
     return render_template('animals.html', subtitle='Animals', form=form)
 
@@ -54,7 +54,7 @@ def organizations():
             data = find_organization(state=state, zip_code=zip_code)
         except Exception:
             return redirect(url_for('organizations'))
-            
+
         if data['organizations']:
             # get all organizations
             orgs_list = []
@@ -79,11 +79,18 @@ def organizations():
                 # add this organization to the list of all organizations
                 orgs_list.append(orgs)
 
-            return render_template('organizationResults.html', subtitle='Organizations', data=data, orgs=orgs_list)
+            return render_template(
+                'organizationResults.html',
+                subtitle='Organizations',
+                data=data,
+                orgs=orgs_list)
         else:
             return render_template('error.html')
-    
-    return render_template('organizations.html', subtitle='Organizations', form=form)
+
+    return render_template(
+        'organizations.html',
+        subtitle='Organizations',
+        form=form)
 
 
 def findAnimal(animalType, state, kids, dogs, cats):
@@ -91,8 +98,8 @@ def findAnimal(animalType, state, kids, dogs, cats):
                       good_with_children=kids,
                       good_with_dogs=dogs,
                       good_with_cats=cats,
-                      return_df = True
-                    )
+                      return_df=True
+                      )
 
 
 def find_organization(state, zip_code):
@@ -104,11 +111,11 @@ def createDictionary(data):
     for ind in data.index:
         animalsDict[data['id'][ind]] = {'Name': data['name'][ind],
                                         'Species': data['species'][ind],
-                                        'Age': data['age'][ind], 
-                                        'Size': data['size'][ind], 
+                                        'Age': data['age'][ind],
+                                        'Size': data['size'][ind],
                                         'Link': data['url'][ind],
                                         'Photo': data['primary_photo_cropped.small'][ind],
-                                       }
+                                        }
     return animalsDict
 
 
