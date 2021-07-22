@@ -37,7 +37,8 @@ def animals():
         dictionary = createDictionary(data)
         return render_template('animalsResults.html',
                                subtitle='Results',
-                               data=dictionary
+                               data=dictionary,
+                               df = data
                                )
     return render_template('animals.html', subtitle='Animals', form=form)
 
@@ -110,11 +111,11 @@ def createDictionary(data):
     animalsDict = {}
     for ind in data.index:
         animalsDict[data['id'][ind]] = {'Name': data['name'][ind],
-                                        'Species': data['species'][ind],
+                                        'Breed': data['breeds.primary'][ind],
                                         'Age': data['age'][ind],
                                         'Size': data['size'][ind],
                                         'Link': data['url'][ind],
-                            'Photo': data['primary_photo_cropped.small'][ind],
+                                        'Photo': data['primary_photo_cropped.small'][ind],
                                         }
     return animalsDict
 
